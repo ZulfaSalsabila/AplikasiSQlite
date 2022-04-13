@@ -14,10 +14,9 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.util.HashMap;
 
 public class TemanBaru extends AppCompatActivity {
-
     private TextInputEditText tNama, tTelpon;
     private Button simpanBtn;
-    String nm,tlp;
+    String nma,tlp;
     DBController controller = new DBController(this);
 
     @Override
@@ -32,15 +31,14 @@ public class TemanBaru extends AppCompatActivity {
         simpanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (tNama.getText().toString().isEmpty() || tTelpon.getText().toString().isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "Data Belum komplit !", Toast.LENGTH_SHORT).show();
-
+                if (tNama.getText().toString().equals("") || tTelpon.getText().toString().equals("")) {
+                    Toast.makeText(TemanBaru.this, "Data Belum komplit !", Toast.LENGTH_SHORT).show();
                 } else {
-                    nm = tNama.getText().toString();
+                    nma = tNama.getText().toString();
                     tlp = tTelpon.getText().toString();
 
-                    HashMap<String, String> qvalues = new HashMap<>();
-                    qvalues.put("nama", nm);
+                    HashMap<String,String> qvalues = new HashMap<>();
+                    qvalues.put("nama", nma);
                     qvalues.put("telpon", tlp);
 
                     controller.insertData(qvalues);
@@ -51,7 +49,7 @@ public class TemanBaru extends AppCompatActivity {
     }
 
     public  void  callHome() {
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        Intent intent = new Intent(TemanBaru.this, MainActivity.class);
         startActivity(intent);
         finish();
     }

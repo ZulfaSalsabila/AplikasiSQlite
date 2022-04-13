@@ -27,6 +27,19 @@ public class DBController extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE if exists teman");
         onCreate(db);
     }
+    public void UpdateData(HashMap<String,String> queryValues) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues nilai = new ContentValues();
+        nilai.put("nama", queryValues.get("nama"));
+        nilai.put("telpon", queryValues.get("telpon"));
+        db.update("teman", nilai, "id=?",new String[]{queryValues.get("id")});
+        db.close();
+    }
+    public void DeleteData(HashMap<String,String> queryValue){
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete("teman", "id=?", new String[]{queryValue.get("id")});
+        db.close();
+    }
     public void  insertData(HashMap<String,String> queryValues){
 
         // Variable SQLiteDatabase

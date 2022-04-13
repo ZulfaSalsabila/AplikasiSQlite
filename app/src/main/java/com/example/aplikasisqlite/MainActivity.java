@@ -21,9 +21,8 @@ public class MainActivity extends AppCompatActivity {
     private TemanAdapter adapter;
     private ArrayList<Teman> temanArrayList;
     DBController controller = new DBController(this);
-
+    String id,nma,tlp;
     private FloatingActionButton fab;
-    String id,nm,tlp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), TemanBaru.class);
+                Intent intent = new Intent(MainActivity.this, TemanBaru.class);
                 startActivity(intent);
             }
         });
@@ -51,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         temanArrayList = new ArrayList<>();
 
 
-        for (int i = 0; i < daftarTeman.size(); i++) {
+        for (int i = 0; i <daftarTeman.size(); i++) {
             Teman teman = new Teman();
 
             teman.setId(daftarTeman.get(i).get("id").toString());
