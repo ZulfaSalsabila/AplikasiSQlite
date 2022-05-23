@@ -18,6 +18,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.aplikasisqlite.adapter.TemanAdapter;
 import com.example.aplikasisqlite.database.DBController;
+import com.example.aplikasisqlite.database.TambahTeman;
 import com.example.aplikasisqlite.database.Teman;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -29,17 +30,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
-    private RecyclerView recyclerView;
-    private TemanAdapter adapter;
-    private ArrayList<Teman> temanArrayList;
-    DBController controller = new DBController(this);
-    String nma,tlp;
 
     private FloatingActionButton fab;
-    String  nm, telpon;
+    private RecyclerView recyclerView;
+    private TemanAdapter adapter;
+    private ArrayList<Teman> temanArrayList = new ArrayList<>();
+
 
     private static final String TAG = MainActivity.class.getSimpleName();
-    private static String url_select = "http://127.0.0.1/umyTI/bacateman.php";
+    private static String url_select = "https://20200140013.praktikumtiumy.com/bacadata.php";
     public static final String TAG_ID = "id";
     public static final String TAG_NAMA = "nama";
     public static final String TAG_TELPON = "telpon";
@@ -60,27 +59,33 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, TemanBaru.class);
+                Intent intent = new Intent(MainActivity.this, TambahTeman.class);
                 startActivity(intent);
             }
         });
     }
     public  void  BacaData() {
         temanArrayList.clear();
-
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+
         JsonArrayRequest jArr = new JsonArrayRequest(url_select,new Response.Listener<JSONArray>(){
             @Override
             public void onResponse(JSONArray response){
                 Log.d(TAG, response.toString());
+
                 //Parsing json
                 for (int i=0; i<response.length();i++){
+
                     try {
                         JSONObject obj = response.getJSONObject(i);
+
                         Teman item = new Teman();
+
                         item.setId(obj.getString(TAG_ID));
                         item.setNama(obj.getString(TAG_NAMA));
                         item.setTelpon(obj.getString(TAG_TELPON));
+
+                        //menambah item ke array
                         temanArrayList.add(item);
                     } catch (JSONException e){
                         e.printStackTrace();

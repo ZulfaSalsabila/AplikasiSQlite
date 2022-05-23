@@ -39,6 +39,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TemanAdapter extends RecyclerView.Adapter<TemanAdapter.TemanViewHolder> {
+
     private ArrayList<Teman> listData;
 
     public TemanAdapter(ArrayList<Teman> listData) {
@@ -60,25 +61,33 @@ public class TemanAdapter extends RecyclerView.Adapter<TemanAdapter.TemanViewHol
         nma = listData.get(position).getNama();
         tlp = listData.get(position).getTelpon();
 
+        // Style
         holder.namaTxt.setTextColor(Color.BLUE);
         holder.namaTxt.setTextSize(20);
+
+        // Set Text
         holder.namaTxt.setText(nma);
         holder.telponTxt.setText(tlp);
 
         holder.cardku.setOnLongClickListener(new View.OnLongClickListener() {
+
             @Override
             public boolean onLongClick(View v) {
                 PopupMenu popupMenu = new PopupMenu(v.getContext(), v);
+
                 popupMenu.inflate(R.menu.popup_menu);
+
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem Item) {
                         switch (Item.getItemId()) {
                             case R.id.mnEdit:
                                 Bundle bendel = new Bundle();
+
                                 bendel.putString("kunci1", id);
                                 bendel.putString("kunci2", nma);
                                 bendel.putString("kunci3", tlp);
+
                                 Intent inten = new Intent(v.getContext(), edit_teman.class);
                                 inten.putExtras(bendel);
                                 v.getContext().startActivity(inten);
@@ -88,6 +97,7 @@ public class TemanAdapter extends RecyclerView.Adapter<TemanAdapter.TemanViewHol
                                 alertdb.setTitle("Yakin " + nma + "akan dihapus?");
                                 alertdb.setMessage("Tekan Ya untuk menghapus");
                                 alertdb.setCancelable(false);
+
                                 alertdb.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int which) {
@@ -116,7 +126,7 @@ public class TemanAdapter extends RecyclerView.Adapter<TemanAdapter.TemanViewHol
         });
     }
     private void HapusData(final String idx) {
-        String url_update = "http://10.0.2.2/umyTI/deletetm.php";
+        String url_update = "https://20200140013.praktikumtiumy.com/deletetm.php";
         final String TAG = MainActivity.class.getSimpleName();
         final String TAG_SUCCES = "success";
         final int[] sukses = new int[1];
