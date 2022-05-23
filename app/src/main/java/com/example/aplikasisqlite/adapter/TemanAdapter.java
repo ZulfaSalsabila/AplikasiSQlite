@@ -81,7 +81,7 @@ public class TemanAdapter extends RecyclerView.Adapter<TemanAdapter.TemanViewHol
                     @Override
                     public boolean onMenuItemClick(MenuItem Item) {
                         switch (Item.getItemId()) {
-                            case R.id.mnEdit:
+                            case R.id.edit:
                                 Bundle bendel = new Bundle();
 
                                 bendel.putString("kunci1", id);

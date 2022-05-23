@@ -46,7 +46,7 @@ public class edit_teman extends AppCompatActivity {
 
 
         idText = findViewById(R.id.textId);
-        edNama = findViewById(R.id.edNm);
+        edNama = findViewById(R.id.edtNama);
         edTelpon=findViewById(R.id.edtTelpon);
         editBtn=findViewById(R.id.buttonUpdate);
 
